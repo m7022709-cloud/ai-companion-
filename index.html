@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 AI Companion - مساعدك الذكي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: #4a00e0;
+            color: white;
+            margin-left: auto;
+            text-align: left;
+        }
+        
+        .ai-message {
+            background: #e9ecef;
+            margin-right: auto;
+            text-align: right;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Companion</h1>
+            <p>مساعدك الذكي الشامل - تعلم، اعمل، أبدع</p>
+        </header>
+        
+        <div class="chat-box" id="chatBox">
+            <div class="message ai-message">
+                <strong>🤖:</strong> أهلاً! أنا مساعدك الذكي الجديد. اسألني عن:
+                <br>• البرمجة والتطوير
+                <br>• التعليم والدراسة
+                <br>• العمل والمشاريع
+                <br>• الإبداع والتصميم
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+            <button onclick="sendMessage()">إرسال 🚀</button>
+        </div>
+    </div>
+
+    <script>
+        const responses = {
+            "مرحباً": "أهلاً وسهلاً! كيف يمكنني مساعدتك اليوم؟",
+            "السلام عليكم": "وعليكم السلام ورحمة الله وبركاته!",
+            "كيف حالك": "بخير الحمدلله، شكراً لسؤالك!",
+            "شكراً": "العفو! دائمًا سعيد بمساعدتك.",
+            "من أنت": "أنا مساعد ذكي تم تطويره لمساعدتك في جميع المجالات!",
+            "ماذا تفعل": "أستطيع:\n🎓 التعليم\n💼 العمل\n🎨 الإبداع\n⚡ البرمجة",
+            "برمجة": "أي لغة تريد تعلمها؟\n• Python للمبتدئين\n• JavaScript للويب\n• Java للتطبيقات",
+            "موقع": "أستطيع مساعدتك في بناء موقع ويب!",
+            "تعلم": "ما الموضوع الذي تريد تعلمه؟"
+        };
+        
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const chatBox = document.getElementById("chatBox");
+            
+            // إضافة رسالة المستخدم
+            chatBox.innerHTML += `
+                <div class="message user-message">
+                    <strong>👤:</strong> ${message}
+                </div>
+            `;
+            
+            // البحث عن رد
+            let response = "هذا سؤال مثير! دعني أبحث عن أفضل إجابة لك...";
+            
+            for (const [key, value] of Object.entries(responses)) {
+                if (message.includes(key)) {
+                    response = value;
+                    break;
+                }
+            }
+            
+            // إضافة رد AI بعد تأخير
+            setTimeout(() => {
+                chatBox.innerHTML += `
+                    <div class="message ai-message">
+                        <strong>🤖:</strong> ${response}
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 800);
+            
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        
+        // السماح بالضغط على Enter
+        document.getElementById("userInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+  </html>أضفت الواجهة الرئيسية للتطبيق
